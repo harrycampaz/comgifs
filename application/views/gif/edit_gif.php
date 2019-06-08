@@ -1,0 +1,116 @@
+<script type="text/javascript">
+
+    function textCounter(field, countfield, maxlimit) {
+        if (field.value.length > maxlimit) // if too long...trim it!
+            field.value = field.value.substring(0, maxlimit);
+        // otherwise, update 'characters left' counter
+        else
+            countfield.value = maxlimit - field.value.length;
+    }
+    // End -->
+</script>
+<h3>Editar GIF</h3>
+<hr/>
+<section class="row">
+    <article class="col-lg-5">
+        <?php
+        if (!defined('BASEPATH'))
+            exit('No direct script access allowed');
+        if (isset($gif)) {
+            $titulo = $gif[0]['titulo'];
+            $etiquetas = $gif[0]['etiquetas'];
+            $categoria = $gif[0]['id_categoria'];
+            $video = $gif[0]['video'];
+        } else {
+            $titulo = set_value('titulo');
+            $etiquetas = set_value('Etiquetas');
+            $categoria = set_value('id_categoria');
+            $video = set_value('video');
+        }
+        $attributes = array('id' => 'register',
+            'class' => 'form-horizontal');
+        echo form_open('gifs/check_edit_gif', $attributes);
+
+        echo validation_errors();
+        $label = array('class' => 'control-label');
+
+        $titulo = array(
+            'name' => 'titulo',
+            'id' => 'inputitulo',
+            'maxlength' => 120,
+            'placeholder' => 'Titulo',
+            'class' => 'form-control negro',
+            'value' => $titulo,
+            'onKeyDown' => "textCounter(this.form.titulo,this.form.remLen,120)",
+            'onKeyUp' => "textCounter(this.form.titulo,this.form.remLen,120)",);
+        
+         $video = array(
+            'name' => 'video',
+            'id' => 'inputVideo',
+            'maxlength' => 200,
+            'placeholder' => 'URL del Video si lo tienes',
+            'class' => 'form-control negro',
+            'value' => $video);
+         
+        $etiquetas = array(
+            'name' => 'etiquetas',
+            'id' => 'inputetiqueta',
+            'placeholder' => 'Etiquetas',
+            'class' => 'form-control negro',
+            'maxlength' => 160,
+            'rows' => '3',
+            'value' => $etiquetas);
+
+
+        $submit = array('type' => 'submit',
+            'class' => 'btn btn-primary',
+            'value' => 'Actualizar');
+        ?>
+        <div class="control-group">
+        <?= form_label('Titulo', '', $label); ?>
+            <div class="controls">
+            <?= form_input($titulo); ?>
+                <input readonly type="text" name="remLen" size="3" maxlength="3" value="120" class="input-small" />
+                <p class="text-error"><?= strip_tags(form_error('titulo')) ?></p>
+            </div>
+        </div>
+        <div class="control-group">
+<?= form_label('Imagen', '', $label); ?>
+            <div class="controls">
+                <img src='<?= base_url() . 'uploads/thumbs/' . $imagen ?>' alt="<?= $imagen ?>">
+            </div>
+        </div>
+        
+        <div class="control-group">
+        <?= form_label('Video', '', $label); ?>
+            <div class="controls">
+            <?= form_input($video); ?>
+                <input readonly type="text" name="remLen" size="3" maxlength="3" value="200" class="input-small" />
+                <p class="text-error"><?= strip_tags(form_error('video')) ?></p>
+            </div>
+        </div>
+        
+        <div class="control-group">
+<?= form_label('etiquetas', '', $label); ?>
+            <div class="controls">
+            <?= form_textarea($etiquetas); ?>  
+            </div>
+        </div>
+        <div class="control-group">
+<?= form_label('categoria', '', $label); ?>
+            <div class="controls">
+            <?= form_dropdown('categoria', $select_categoria, $categoria, "id='categoria'"); ?>
+                <p class="text-error"><?= strip_tags(form_error('categoria[]')) ?></p>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+<?php echo form_hidden('imagen', $imagen);
+echo form_submit($submit);
+?>
+            </div>
+        </div>
+        <?= form_fieldset_close() ?>
+        </form>
+    </article>
+</section>

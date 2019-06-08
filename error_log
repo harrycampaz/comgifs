@@ -1,0 +1,1 @@
+[28-Dec-2015 02:57:58 America/Bogota] PHP Fatal error:  Call to undefined method CI_DB_mysql_driver::num_rows() in /home/hcampaz/public_html/application/models/bpartner_model.php on line 243

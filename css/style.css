@@ -1,0 +1,50 @@
+.blanquear{ color:white ; }
+
+.form{
+
+float: left;
+margin: 0px 4px 0px 1px;
+}
+input.negro{
+  color: #000;
+  
+}
+p.text-error{
+  color: #e95d4e;
+}
+.correr{
+	padding: 10px 10px 0px 10px;
+}
+li{
+	list-style: none;
+}
+textarea.negro{
+	color: #000;
+}
+input.error{
+  border-color: #e95d4e;
+   border-width: 2px;
+   border-style: solid;
+}
+
+label.error{
+  color: #e95d4e;
+  
+}
+input.valid{
+   border-color: #1dccaa;
+   border-width: 2px;
+   border-style: solid;
+}
+
+#diviertete{
+    background-color: #ffffff;
+    color: #033C74;
+}
+#registrar{
+    background-color: #ffffff;
+    color: #033C74;
+}
+
+
+
